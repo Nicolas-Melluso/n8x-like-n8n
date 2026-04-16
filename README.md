@@ -7,6 +7,8 @@ Proyecto para aplicar la leccion de low-code en un caso util:
 3. guarda datos estructurados en CSV,
 4. envia el resultado por correo.
 
+![alt text](image.png)
+
 ## Que incluye
 
 - API con FastAPI
