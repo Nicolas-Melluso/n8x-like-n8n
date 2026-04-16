@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel Dieta -> Lista de Compras</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f8ff;
+      --ink: #101827;
+      --muted: #475569;
+      --card: #ffffff;
+      --line: #d7e0ef;
+      --brand: #0f4c81;
+      --brand-2: #1d8a8a;
+      --accent: #ffb703;
+      --pending: #94a3b8;
+      --running: #f59e0b;
+      --done: #16a34a;
+      --error: #dc2626;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      background:
+        radial-gradient(circle at 8% 10%, #dbeafe 0%, transparent 30%),
+        radial-gradient(circle at 92% 16%, #ccfbf1 0%, transparent 25%),
+        linear-gradient(180deg, #f7fbff 0%, #eff6ff 45%, #f8fafc 100%);
+      color: var(--ink);
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto 40px;
+      padding: 0 18px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #0f4c81, #1d8a8a);
+      color: #fff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 14px 34px rgba(15, 76, 129, 0.28);
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -60px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0));
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 4vw, 34px);
+      letter-spacing: 0.2px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      margin: 0;
+      opacity: 0.94;
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-meta {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .card {
+      background: linear-gradient(180deg, #ffffff, #fbfdff);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+      padding: 16px 16px 14px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 14px;
+      background: #fff;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .step:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 14px rgba(15, 23, 42, 0.08);
+    }
+
+    .step .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 12px;
+      color: #fff;
+      margin-bottom: 8px;
+      background: var(--pending);
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .step.pending .badge { background: var(--pending); }
+    .step.running .badge { background: var(--running); }
+    .step.done .badge { background: var(--done); }
+    .step.error .badge { background: var(--error); }
+
+    .progress {
+      margin-top: 12px;
+      height: 10px;
+      border-radius: 999px;
+      background: #dbe7ff;
+      overflow: hidden;
+      border: 1px solid #c8d8f6;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      transition: width 360ms ease;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 7px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px;
+      font: inherit;
+      background: #fff;
+      margin-bottom: 11px;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #7aa2d7;
+      box-shadow: 0 0 0 3px rgba(41, 121, 255, 0.12);
+    }
+
+    textarea { min-height: 180px; resize: vertical; }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button,
+    .ghost {
+      border: none;
+      border-radius: 11px;
+      padding: 10px 15px;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--brand);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover,
+    .ghost:hover {
+      filter: brightness(0.95);
+      transform: translateY(-1px);
+    }
+
+    .ghost {
+      background: #0f172a;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+      line-height: 1.35;
+    }
+
+    .result-grid {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .result-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 12px;
+    }
+
+    .result-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .kpi div {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px;
+      text-align: center;
+      background: #fcfdff;
+    }
+
+    .kpi strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .kpi span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    ul.pretty {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.55;
+    }
+
+    ul.timeline {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.5;
+    }
+
+    ul.timeline li {
+      margin-bottom: 5px;
+      color: #0f172a;
+      font-size: 13px;
+    }
+
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: #334155;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 9px;
+    }
+
+    pre {
+      margin: 0;
+      background: #0f172a;
+      color: #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+      max-height: 260px;
+      overflow: auto;
+      font-size: 12px;
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    details {
+      margin-top: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .steps { grid-template-columns: 1fr 1fr; }
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 580px) {
+      .steps { grid-template-columns: 1fr; }
+      .kpi { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Dieta -> IA -> CSV -> Email</h1>
+      <p>Convierte una dieta en una lista de compras accionable, la guarda en formato estructurado tipo Dataverse y la envia por correo en un clic.</p>
+      <div class="hero-meta">
+        <span class="chip">Workflow: diet-shopping-email</span>
+        <span class="chip">IA: GitHub Models</span>
+        <span class="chip">Storage: CSV local</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Pasos pendientes de la ejecucion</h2>
+      <div class="steps">
+        <article class="step pending" id="step-1">
+          <div class="badge" id="badge-1">Pendiente</div>
+          <strong>1) Escribir dieta</strong>
+          <p>Ingresa dieta y correo.</p>
+        </article>
+        <article class="step pending" id="step-2">
+          <div class="badge" id="badge-2">Pendiente</div>
+          <strong>2) IA analiza</strong>
+          <p>GitHub Models genera lista.</p>
+        </article>
+        <article class="step pending" id="step-3">
+          <div class="badge" id="badge-3">Pendiente</div>
+          <strong>3) Guardar CSV</strong>
+          <p>Registro estructurado local.</p>
+        </article>
+        <article class="step pending" id="step-4">
+          <div class="badge" id="badge-4">Pendiente</div>
+          <strong>4) Enviar email</strong>
+          <p>Lista formateada al destinatario.</p>
+        </article>
+      </div>
+      <div class="progress" aria-label="Progreso de ejecucion"><div id="progressBar"></div></div>
+    </section>
+
+    <section class="grid">
+      <section class="card">
+        <h2>Entrada del flujo</h2>
+        <label for="email">Email de destino</label>
+        <input id="email" type="email" placeholder="tu-correo@dominio.com" />
+
+        <label for="diet">Dieta (texto libre)</label>
+        <textarea id="diet" placeholder="Ejemplo: desayuno avena con banana y yogurt; almuerzo pollo con arroz y ensalada; cena tortilla de verduras."></textarea>
+
+        <div class="actions">
+          <button id="runBtn">Ejecutar flujo completo</button>
+          <a class="ghost" href="/docs" target="_blank" rel="noreferrer">Ver API</a>
+        </div>
+        <p class="small">Requiere variables de entorno cargadas desde .env: GH_MODELS_TOKEN y SMTP_*. Si falta una, veras el error detallado en salida.</p>
+      </section>
+
+      <section class="card">
+        <h2>Resultado de la ejecucion</h2>
+        <div class="result-grid">
+          <article class="result-card">
+            <h3>Resumen</h3>
+            <div class="kpi">
+              <div><strong id="kpiSteps">0</strong><span>pasos ejecutados</span></div>
+              <div><strong id="kpiItems">0</strong><span>items de compra</span></div>
+              <div><strong id="kpiStatus">-</strong><span>estado final</span></div>
+            </div>
+          </article>
+          <article class="result-card">
+            <h3>Lista de compras</h3>
+            <ul id="shoppingList" class="pretty"><li>Sin datos todavia.</li></ul>
+          </article>
+          <article class="result-card">
+            <h3>Registro</h3>
+            <div class="mono" id="csvPath">CSV pendiente de generar.</div>
+          </article>
+          <article class="result-card">
+            <h3>Subpasos en vivo</h3>
+            <div class="mono" id="runMeta">Sin ejecucion en curso.</div>
+            <ul id="liveSteps" class="timeline"><li>Esperando ejecucion.</li></ul>
+          </article>
+        </div>
+        <details>
+          <summary>Ver JSON crudo</summary>
+          <pre id="output">Aun no hay ejecuciones.</pre>
+        </details>
+      </section>
+    </section>
+  </div>
+
+  <script>
+    const output = document.getElementById("output");
+    const runBtn = document.getElementById("runBtn");
+    const progressBar = document.getElementById("progressBar");
+    const shoppingList = document.getElementById("shoppingList");
+    const kpiSteps = document.getElementById("kpiSteps");
+    const kpiItems = document.getElementById("kpiItems");
+    const kpiStatus = document.getElementById("kpiStatus");
+    const csvPath = document.getElementById("csvPath");
+    const liveSteps = document.getElementById("liveSteps");
+    const runMeta = document.getElementById("runMeta");
+
+    function setOutput(value) {
+      output.textContent = typeof value === "string" ? value : JSON.stringify(value, null, 2);
+    }
+
+    function setProgress(value) {
+      progressBar.style.width = `${Math.max(0, Math.min(100, value))}%`;
+    }
+
+    function updateStep(step, state, label) {
+      const node = document.getElementById(`step-${step}`);
+      const badge = document.getElementById(`badge-${step}`);
+      node.className = `step ${state}`;
+      badge.textContent = label;
+    }
+
+    function resetResultCards() {
+      kpiSteps.textContent = "0";
+      kpiItems.textContent = "0";
+      kpiStatus.textContent = "-";
+      csvPath.textContent = "CSV pendiente de generar.";
+      shoppingList.innerHTML = "<li>Sin datos todavia.</li>";
+      runMeta.textContent = "Sin ejecucion en curso.";
+      liveSteps.innerHTML = "<li>Esperando ejecucion.</li>";
+    }
+
+    function resetSteps() {
+      for (let i = 1; i <= 4; i += 1) {
+        updateStep(i, "pending", "Pendiente");
+      }
+      setProgress(0);
+    }
+
+    function renderShoppingItems(items) {
+      if (!Array.isArray(items) || items.length === 0) {
+        shoppingList.innerHTML = "<li>La IA no devolvio items.</li>";
+        return;
+      }
+
+      shoppingList.innerHTML = "";
+      items.forEach((item) => {
+        const li = document.createElement("li");
+        const name = item.name || "item";
+        const qty = item.quantity || "cantidad no indicada";
+        const category = item.category || "general";
+        li.textContent = `${name} - ${qty} (${category})`;
+        shoppingList.appendChild(li);
+      });
+    }
+
+    function addLiveStep(message) {
+      if (liveSteps.children.length === 1 && liveSteps.children[0].textContent === "Esperando ejecucion.") {
+        liveSteps.innerHTML = "";
+      }
+      const li = document.createElement("li");
+      li.textContent = message;
+      liveSteps.appendChild(li);
+    }
+
+    function stepToNumber(stepId) {
+      const map = {
+        "validar-input": 1,
+        "analizar-dieta-ia": 2,
+        "guardar-csv": 3,
+        "enviar-correo": 4,
+      };
+      return map[stepId] || null;
+    }
+
+    function updateUiFromRun(runData) {
+      setProgress(runData.progress_pct || 0);
+      runMeta.textContent = `Run: ${runData.run_id} | Estado: ${runData.status}`;
+
+      const completed = Array.isArray(runData.completed_steps) ? runData.completed_steps : [];
+      kpiSteps.textContent = String(completed.length);
+
+      completed.forEach((step) => {
+        const stepNo = stepToNumber(step.step_id);
+        if (stepNo) {
+          updateStep(stepNo, "done", `${step.duration_ms} ms`);
+        }
+      });
+
+      if (runData.current_step) {
+        const stepNo = stepToNumber(runData.current_step);
+        if (stepNo) {
+          updateStep(stepNo, "running", "En progreso");
+        }
+      }
+    }
+
+    async function pollRun(runId) {
+      let seen = 0;
+      for (let attempt = 0; attempt < 300; attempt += 1) {
+        await new Promise((resolve) => setTimeout(resolve, 700));
+        const runRes = await fetch(`/runs/${encodeURIComponent(runId)}`);
+        const runData = await runRes.json();
+
+        if (!runRes.ok) {
+          throw new Error(runData.detail || "No se pudo consultar el estado del run.");
+        }
+
+        updateUiFromRun(runData);
+
+        const completed = Array.isArray(runData.completed_steps) ? runData.completed_steps : [];
+        if (completed.length > seen) {
+          const newSteps = completed.slice(seen);
+          newSteps.forEach((step) => {
+            addLiveStep(`Paso ${step.step_id} completado en ${step.duration_ms} ms`);
+          });
+          seen = completed.length;
+        }
+
+        if (runData.status === "completed") {
+          return runData;
+        }
+        if (runData.status === "failed") {
+          throw new Error(runData.error || "El workflow fallo.");
+        }
+      }
+
+      throw new Error("Timeout esperando finalizacion del workflow.");
+    }
+
+    async function runDietFlow() {
+      runBtn.disabled = true;
+      resetSteps();
+      resetResultCards();
+
+      const email = document.getElementById("email").value.trim();
+      const diet = document.getElementById("diet").value.trim();
+
+      if (!email || !diet) {
+        setOutput("Completa email y dieta.");
+        updateStep(1, "error", "Error");
+        runBtn.disabled = false;
+        return;
+      }
+
+      updateStep(1, "done", "Completado");
+      updateStep(2, "running", "En progreso");
+      setProgress(25);
+      setOutput("Iniciando workflow asincrono...");
+      addLiveStep("Run creado. Preparando ejecucion...");
+
+      try {
+        const res = await fetch("/run-async/diet-shopping-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ input: { email: email, diet_text: diet } }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          updateStep(1, "error", "Error");
+          setProgress(25);
+          kpiStatus.textContent = "Error";
+          setOutput(data);
+          runBtn.disabled = false;
+          return;
+        }
+
+        addLiveStep(`Run ${data.run_id} en cola...`);
+        const finalRun = await pollRun(data.run_id);
+
+        const result = finalRun.result || {};
+        const trace = Array.isArray(result.trace) ? result.trace : [];
+        const ctx = result.context || {};
+
+        if (finalRun.status === "completed") {
+          updateStep(4, "done", "Completado");
+          setProgress(100);
+          addLiveStep("Workflow completado correctamente.");
+        }
+
+        kpiSteps.textContent = String(trace.length || 0);
+        const items = Array.isArray(ctx.shopping_items) ? ctx.shopping_items : [];
+        kpiItems.textContent = String(items.length);
+        kpiStatus.textContent = ctx.status || "OK";
+        csvPath.textContent = ctx.csv_path || "CSV no detectado";
+        renderShoppingItems(items);
+        setOutput(finalRun);
+      } catch (err) {
+        const runningStepNode = document.querySelector(".step.running");
+        if (runningStepNode) {
+          const id = runningStepNode.id;
+          const n = Number(id.replace("step-", ""));
+          if (!Number.isNaN(n)) {
+            updateStep(n, "error", "Error");
+          }
+        }
+        kpiStatus.textContent = "Error";
+        addLiveStep(`Error: ${err.message}`);
+        setOutput("Error ejecutando flujo: " + err.message);
+      } finally {
+        runBtn.disabled = false;
+      }
+    }
+
+    runBtn.addEventListener("click", runDietFlow);
+    resetSteps();
+    resetResultCards();
+  </script>
+</body>
+</html>

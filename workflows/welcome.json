@@ -1,0 +1,31 @@
+{
+  "id": "welcome-student",
+  "name": "Welcome Student",
+  "description": "Flujo simple estilo n8n para saludar estudiantes",
+  "steps": [
+    {
+      "id": "set-course",
+      "action": "set_values",
+      "params": {
+        "values": {
+          "course": "Generative AI 101"
+        }
+      }
+    },
+    {
+      "id": "build-message",
+      "action": "template",
+      "params": {
+        "template": "Hola {student_name}, bienvenido al curso {course}."
+      },
+      "save_as": "message"
+    },
+    {
+      "id": "log-message",
+      "action": "log",
+      "params": {
+        "message": "Mensaje final: {message}"
+      }
+    }
+  ]
+}

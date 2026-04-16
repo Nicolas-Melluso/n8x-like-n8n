@@ -1,0 +1,40 @@
+{
+  "id": "diet-shopping-email",
+  "name": "Dieta -> Lista IA -> CSV -> Email",
+  "description": "Analiza una dieta con GitHub Models, guarda resultado estructurado y envia correo.",
+  "steps": [
+    {
+      "id": "validar-input",
+      "action": "validate_required",
+      "params": {
+        "fields": ["diet_text", "email"]
+      }
+    },
+    {
+      "id": "analizar-dieta-ia",
+      "action": "github_models_shopping_list",
+      "params": {
+        "timeout": 60
+      },
+      "save_as": "analysis"
+    },
+    {
+      "id": "guardar-csv",
+      "action": "save_csv",
+      "params": {
+        "path": "data/diet_shopping_runs.csv",
+        "status": "GUARDADO_EN_CSV"
+      },
+      "save_as": "storage"
+    },
+    {
+      "id": "enviar-correo",
+      "action": "send_email_smtp",
+      "params": {
+        "subject": "Tu lista de compras semanal",
+        "body_template": "Hola,\n\nAnalizamos tu dieta y esta es tu lista de compras:\n\n{shopping_list_text}\n\nNotas: {shopping_notes}\n\nArchivo de registro: {csv_path}\n\nSaludos."
+      },
+      "save_as": "email_result"
+    }
+  ]
+}

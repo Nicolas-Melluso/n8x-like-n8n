@@ -1,0 +1,70 @@
+timestamp_utc,email,diet_text,shopping_list_text,shopping_items_json,shopping_notes,status
+2026-04-16T22:33:25.036192+00:00,nicolas.e.melluso@gmail.com,desayuno: avena y banana; almuerzo: pollo con arroz; cena: ensalada con atun,"avena: 1 kg, banana: 7 unidades, pollo: 1.5 kg, arroz: 1 kg, ensalada: 1 bolsa, atún: 3 latas","[{""name"": ""avena"", ""quantity"": ""1 kg"", ""category"": ""granos""}, {""name"": ""banana"", ""quantity"": ""7 unidades"", ""category"": ""frutas""}, {""name"": ""pollo"", ""quantity"": ""1.5 kg"", ""category"": ""carnes""}, {""name"": ""arroz"", ""quantity"": ""1 kg"", ""category"": ""granos""}, {""name"": ""ensalada"", ""quantity"": ""1 bolsa"", ""category"": ""vegetales""}, {""name"": ""atún"", ""quantity"": ""3 latas"", ""category"": ""pescados""}]",Asegúrate de elegir avena sin azúcar y pollo fresco. Puedes variar las verduras en la ensalada según tu preferencia.,GUARDADO_EN_CSV
+2026-04-16T22:36:24.678430+00:00,nicolas.e.melluso@gmail.com,"* Desayuno:  
+  - Café con leche proteica La Serenísima (250 ml → 12 g proteína)  
+  - Vaso de agua (250 ml → 0 g proteína)  
+
+* Pre-comida:  
+  - Batido de proteína con agua (30 g polvo → 25 g proteína)  
+
+* Almuerzo:  
+  - Pechuga de pollo (200 g cocida → 62 g proteína)  
+  - Ensalada de verduras frescas + aceite de oliva (200 g verduras + 10 ml aceite → 3 g proteína, 8 g carbos, 5 g grasa)  
+
+* Merienda:  
+  - Rapiditas integrales (2 unidades ~100 g → 10 g proteína, 45 g carbos)  
+  - Queso Port Salut (50 g → 12 g proteína, 12 g grasa)  
+  - Mate sin azúcar (0 g proteína)  
+
+* Cena (opción 1):  
+  - Carne magra (150 g cocida → 39 g proteína, 10 g grasa)  
+  - Arroz cocido (150 g → 5 g proteína, 45 g carbos)  
+  - Verduras salteadas (150 g + 10 ml aceite → 5 g proteína, 10 g carbos, 5 g grasa)  
+
+* Cena (opción 2):  
+  - Salmón (200 g → 40 g proteína, 12 g grasa)  
+  - Palta (100 g → 3 g proteína, 15 g grasa)  
+  - Arroz cocido (150 g → 5 g proteína, 45 g carbos)  
+  - Queso fresco (50 g → 12 g proteína, 12 g grasa)  
+
+---
+
+✅ Totales diarios aproximados
+- Proteínas: 170–180 g  
+- Carbohidratos: 120–130 g  
+- Grasas: 45–55 g  
+- Calorías: 2,000–2,200 kcal","Café con leche proteica La Serenísima: 1 litro, Agua: 2 litros, Polvo de proteína: 210 g, Pechuga de pollo: 1.4 kg, Verduras frescas: 1.4 kg, Aceite de oliva: 70 ml, Rapiditas integrales: 14 unidades, Queso Port Salut: 350 g, Mate: 1 paquete, Carne magra: 1.05 kg, Arroz: 1.05 kg, Verduras para saltear: 1.05 kg, Salmón: 1.4 kg, Palta: 700 g, Queso fresco: 350 g","[{""name"": ""Café con leche proteica La Serenísima"", ""quantity"": ""1 litro"", ""category"": ""Bebidas""}, {""name"": ""Agua"", ""quantity"": ""2 litros"", ""category"": ""Bebidas""}, {""name"": ""Polvo de proteína"", ""quantity"": ""210 g"", ""category"": ""Suplementos""}, {""name"": ""Pechuga de pollo"", ""quantity"": ""1.4 kg"", ""category"": ""Carnes""}, {""name"": ""Verduras frescas"", ""quantity"": ""1.4 kg"", ""category"": ""Verduras""}, {""name"": ""Aceite de oliva"", ""quantity"": ""70 ml"", ""category"": ""Grasas""}, {""name"": ""Rapiditas integrales"", ""quantity"": ""14 unidades"", ""category"": ""Panadería""}, {""name"": ""Queso Port Salut"", ""quantity"": ""350 g"", ""category"": ""Lácteos""}, {""name"": ""Mate"", ""quantity"": ""1 paquete"", ""category"": ""Bebidas""}, {""name"": ""Carne magra"", ""quantity"": ""1.05 kg"", ""category"": ""Carnes""}, {""name"": ""Arroz"", ""quantity"": ""1.05 kg"", ""category"": ""Cereales""}, {""name"": ""Verduras para saltear"", ""quantity"": ""1.05 kg"", ""category"": ""Verduras""}, {""name"": ""Salmón"", ""quantity"": ""1.4 kg"", ""category"": ""Pescados""}, {""name"": ""Palta"", ""quantity"": ""700 g"", ""category"": ""Frutas""}, {""name"": ""Queso fresco"", ""quantity"": ""350 g"", ""category"": ""Lácteos""}]",Considera ajustar las cantidades según el número de personas y las porciones diarias. La lista está diseñada para una semana.,GUARDADO_EN_CSV
+2026-04-16T22:39:48.543834+00:00,anncomba@gmail.com,"* Desayuno:  
+  - Café con leche proteica La Serenísima (250 ml → 12 g proteína)  
+  - Vaso de agua (250 ml → 0 g proteína)  
+
+* Pre-comida:  
+  - Batido de proteína con agua (30 g polvo → 25 g proteína)  
+
+* Almuerzo:  
+  - Pechuga de pollo (200 g cocida → 62 g proteína)  
+  - Ensalada de verduras frescas + aceite de oliva (200 g verduras + 10 ml aceite → 3 g proteína, 8 g carbos, 5 g grasa)  
+
+* Merienda:  
+  - Rapiditas integrales (2 unidades ~100 g → 10 g proteína, 45 g carbos)  
+  - Queso Port Salut (50 g → 12 g proteína, 12 g grasa)  
+  - Mate sin azúcar (0 g proteína)  
+
+* Cena (opción 1):  
+  - Carne magra (150 g cocida → 39 g proteína, 10 g grasa)  
+  - Arroz cocido (150 g → 5 g proteína, 45 g carbos)  
+  - Verduras salteadas (150 g + 10 ml aceite → 5 g proteína, 10 g carbos, 5 g grasa)  
+
+* Cena (opción 2):  
+  - Salmón (200 g → 40 g proteína, 12 g grasa)  
+  - Palta (100 g → 3 g proteína, 15 g grasa)  
+  - Arroz cocido (150 g → 5 g proteína, 45 g carbos)  
+  - Queso fresco (50 g → 12 g proteína, 12 g grasa)  
+
+---
+
+✅ Totales diarios aproximados
+- Proteínas: 170–180 g  
+- Carbohidratos: 120–130 g  
+- Grasas: 45–55 g  
+- Calorías: 2,000–2,200 kcal","Café con leche proteica La Serenísima: 1 litro, Agua: 2 litros, Polvo de proteína: 210 g, Pechuga de pollo: 1.4 kg, Verduras frescas: 1.4 kg, Aceite de oliva: 70 ml, Rapiditas integrales: 14 unidades, Queso Port Salut: 350 g, Mate: 1 paquete, Carne magra: 1.05 kg, Arroz: 1.05 kg, Verduras para saltear: 1.05 kg, Salmón: 1.4 kg, Palta: 700 g, Queso fresco: 350 g","[{""name"": ""Café con leche proteica La Serenísima"", ""quantity"": ""1 litro"", ""category"": ""Bebidas""}, {""name"": ""Agua"", ""quantity"": ""2 litros"", ""category"": ""Bebidas""}, {""name"": ""Polvo de proteína"", ""quantity"": ""210 g"", ""category"": ""Suplementos""}, {""name"": ""Pechuga de pollo"", ""quantity"": ""1.4 kg"", ""category"": ""Carnes""}, {""name"": ""Verduras frescas"", ""quantity"": ""1.4 kg"", ""category"": ""Vegetales""}, {""name"": ""Aceite de oliva"", ""quantity"": ""70 ml"", ""category"": ""Grasas""}, {""name"": ""Rapiditas integrales"", ""quantity"": ""14 unidades"", ""category"": ""Panadería""}, {""name"": ""Queso Port Salut"", ""quantity"": ""350 g"", ""category"": ""Lácteos""}, {""name"": ""Mate"", ""quantity"": ""1 paquete"", ""category"": ""Bebidas""}, {""name"": ""Carne magra"", ""quantity"": ""1.05 kg"", ""category"": ""Carnes""}, {""name"": ""Arroz"", ""quantity"": ""1.05 kg"", ""category"": ""Granos""}, {""name"": ""Verduras para saltear"", ""quantity"": ""1.05 kg"", ""category"": ""Vegetales""}, {""name"": ""Salmón"", ""quantity"": ""1.4 kg"", ""category"": ""Pescados""}, {""name"": ""Palta"", ""quantity"": ""700 g"", ""category"": ""Frutas""}, {""name"": ""Queso fresco"", ""quantity"": ""350 g"", ""category"": ""Lácteos""}]",Asegúrate de revisar la frescura de las verduras y carnes. Ajusta las cantidades según el número de personas.,GUARDADO_EN_CSV
