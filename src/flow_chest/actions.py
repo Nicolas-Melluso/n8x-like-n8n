@@ -37,7 +37,7 @@ def _extract_json_object(raw_text: str) -> Dict[str, Any]:
     start = text.find("{")
     end = text.rfind("}")
     if start == -1 or end == -1 or end <= start:
-        raise ValueError("La respuesta del modelo no contiene JSON valido")
+        raise ValueError("The model's response does not contain valid JSON")
     return json.loads(text[start : end + 1])
 
 
